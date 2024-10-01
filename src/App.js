@@ -1,4 +1,4 @@
-import React from 'react';
+import './styles.css';
 import AddDocument from './AddDocument';
 import ListDocuments from './ListDocuments';
 

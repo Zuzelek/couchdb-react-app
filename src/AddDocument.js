@@ -24,18 +24,19 @@ const AddDocument = () => {
       setArtist('');
       setReleaseDate('');
     } catch (err) {
-      console.error('Error adding document', err);
+      console.error('Error adding document:', err);
     }
   };
 
   return (
     <div>
-      <h3>Add Document</h3>
+      <h3>Add New Document</h3>
       <input
         type="text"
         value={track}
         onChange={(e) => setTrack(e.target.value)}
         placeholder="Track Name"
+        required
       />
       <br />
       <input
@@ -43,6 +44,7 @@ const AddDocument = () => {
         value={albumName}
         onChange={(e) => setAlbumName(e.target.value)}
         placeholder="Album Name"
+        required
       />
       <br />
       <input
@@ -50,6 +52,7 @@ const AddDocument = () => {
         value={artist}
         onChange={(e) => setArtist(e.target.value)}
         placeholder="Artist"
+        required
       />
       <br />
       <input
@@ -57,6 +60,7 @@ const AddDocument = () => {
         value={releaseDate}
         onChange={(e) => setReleaseDate(e.target.value)}
         placeholder="Release Date"
+        required
       />
       <br />
       <button onClick={addDoc}>Add Document</button>

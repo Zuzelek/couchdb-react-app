@@ -9,7 +9,7 @@ const UpdateDocument = ({ doc, setDocToEdit, setDocs }) => {
 
   const updateDoc = async () => {
     const updatedDoc = {
-      ...doc,  // Keeping the id and rev without changing it
+      ...doc,  // Keep _id and _rev intact
       Track: track,
       "Album Name": albumName,
       Artist: artist,
@@ -20,9 +20,8 @@ const UpdateDocument = ({ doc, setDocToEdit, setDocs }) => {
       const response = await localDB.put(updatedDoc);
       console.log('Document updated successfully:', response);
       alert('Document updated');
-      setDocToEdit(null);  // Closing the form after updating
-      
-      // Fetching the documents
+      setDocToEdit(null);  // Close the form after updating
+
       const allDocs = await localDB.allDocs({ include_docs: true });
       setDocs(allDocs.rows.map(row => row.doc));
     } catch (err) {
@@ -31,7 +30,7 @@ const UpdateDocument = ({ doc, setDocToEdit, setDocs }) => {
   };
 
   return (
-    <div>
+    <div className="update-form">
       <h3>Update Document</h3>
       <input
         type="text"
@@ -39,28 +38,24 @@ const UpdateDocument = ({ doc, setDocToEdit, setDocs }) => {
         onChange={(e) => setTrack(e.target.value)}
         placeholder="Track Name"
       />
-      <br />
       <input
         type="text"
         value={albumName}
         onChange={(e) => setAlbumName(e.target.value)}
         placeholder="Album Name"
       />
-      <br />
       <input
         type="text"
         value={artist}
         onChange={(e) => setArtist(e.target.value)}
         placeholder="Artist"
       />
-      <br />
       <input
         type="date"
         value={releaseDate}
         onChange={(e) => setReleaseDate(e.target.value)}
         placeholder="Release Date"
       />
-      <br />
       <button onClick={updateDoc}>Save Changes</button>
       <button onClick={() => setDocToEdit(null)}>Cancel</button>
     </div>
